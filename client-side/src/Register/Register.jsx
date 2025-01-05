@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import { useUser } from '../UserContext';
 
 const Register = () => {
+  const { setUser } = useUser();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -61,6 +63,7 @@ const Register = () => {
           saved_videos_count: 0
         };
         
+        setUser(userData); // Update user context
         localStorage.setItem("userData", JSON.stringify(userData));
         
         // Dispatch event to notify components about user data change
@@ -78,6 +81,32 @@ const Register = () => {
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred. Please try again.");
+    }
+  };
+
+  const handleLogin = async (email, password) => {
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, pass: password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem('user_id', data.user_id);
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('img_url', data.imgUrl);
+        // Redirect or update UI as needed
+      } else {
+        console.error(data.message);
+        // Display error message to user
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 

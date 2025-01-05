@@ -8,7 +8,7 @@ const Profile = () => {
     return storedData ? JSON.parse(storedData) : {
       user_Name: "User",
       user_type: "student",
-      imgUrl: "/public/images/pic-1.jpg",
+      imgUrl: "/public/images/default-avatar.jpg",
       comments_count: 0,
       likes_count: 0,
       saved_videos_count: 0
@@ -19,26 +19,37 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userId = localStorage.getItem('user_id');
+        const storedUserData = localStorage.getItem('userData');
+        const userData = storedUserData ? JSON.parse(storedUserData) : null;
         
-        if (!userId) {
+        if (!userData || !userData.user_id) {
           window.location.href = '/login';
           return;
         }
-        const response = await fetch(`http://localhost:5000/profile?user_id=${userId}`);
+        
+        const response = await fetch(`http://localhost:5000/profile?user_id=${userData.user_id}`);
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
 
         if (data.imgUrl) {
-          const cleanPath = data.imgUrl.replace(/\/static\/uploads\/static\/uploads\//, '/static/uploads/');
-          data.imgUrl = cleanPath.startsWith('http') 
-            ? cleanPath 
+          let cleanPath = data.imgUrl;
+          
+          // Handle potential double "/static/uploads/"
+          if (cleanPath.includes('/static/uploads//')) {
+            cleanPath = cleanPath.replace('/static/uploads//', '/static/uploads/');
+          }
+
+          // Prepend base URL if the path is relative
+          data.imgUrl = cleanPath.startsWith('http')
+            ? cleanPath
             : `http://localhost:5000${cleanPath}`;
+        } else {
+          data.imgUrl = "/public/images/default-avatar.jpg";
         }
+
         setUserData(data);
-        // Update localStorage with latest data
         localStorage.setItem('userData', JSON.stringify(data));
       } catch (error) {
         console.error("Failed to fetch user data:", error);
@@ -67,13 +78,13 @@ const Profile = () => {
 
         <div className="info">
           <div className="user">
-          <img
-              src={imgError ? "/public/images/pic-1.jpg" : userData.imgUrl}
+            <img
+              src={imgError ? "/public/images/default-avatar.jpg" : userData.imgUrl || "/public/images/default-avatar.jpg"}
               alt="Profile"
               className="w-24 h-24 rounded-full object-cover mx-auto block"
               onError={(e) => {
                 setImgError(true);
-                e.target.src = "/public/images/pic-1.jpg";
+                e.target.src = "/public/images/default-avatar.jpg";
               }}
             />
             <h3>{userData.user_Name}</h3>
