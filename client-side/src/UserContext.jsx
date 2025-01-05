@@ -15,6 +15,14 @@ export const UserProvider = ({ children }) => {
         }
     }, []);
 
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('userData', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('userData');
+        }
+    }, [user]);
+
     const handleLogin = async (email, password) => {
         try {
             const response = await fetch('/login', {

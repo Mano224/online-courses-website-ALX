@@ -40,9 +40,9 @@ const Login = () => {
           user_Name: result.username || "Unknown User", // Fallback to default if undefined
           user_type: result.user_type || "student", // Default to "student" if not provided
           email: formData.email,
-          imgUrl: result.img_url
-            ? `http://localhost:5000/static/uploads/${result.img_url}` // Ensure correct path
-            : "http://localhost:5000/static/uploads/default-avatar.jpg", // Default avatar
+          imgUrl: result.imgUrl
+            ? `http://localhost:5000/static/uploads/${result.imgUrl}` // Ensure correct path
+            : "/public/images/ai.jpg", // Default avatar
         };
         console.log('Full Backend Response:', result);
         console.log('Processed User Data:', userData);

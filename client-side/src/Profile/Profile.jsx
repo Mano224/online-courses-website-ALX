@@ -8,7 +8,7 @@ const Profile = () => {
     return storedData ? JSON.parse(storedData) : {
       user_Name: "User",
       user_type: "student",
-      imgUrl: "/public/images/default-avatar.jpg",
+      imgUrl: "/public/images/ai.jpg",
       comments_count: 0,
       likes_count: 0,
       saved_videos_count: 0
@@ -22,10 +22,10 @@ const Profile = () => {
         const storedUserData = localStorage.getItem('userData');
         const userData = storedUserData ? JSON.parse(storedUserData) : null;
         
-        if (!userData || !userData.user_id) {
-          window.location.href = '/login';
-          return;
-        }
+        // if (!userData || !userData.user_id) {
+        //   window.location.href = '/login';
+        //   return;
+        // }
         
         const response = await fetch(`http://localhost:5000/profile?user_id=${userData.user_id}`);
         if (!response.ok) {
@@ -44,9 +44,9 @@ const Profile = () => {
           // Prepend base URL if the path is relative
           data.imgUrl = cleanPath.startsWith('http')
             ? cleanPath
-            : `http://localhost:5000/static/uploads/${cleanPath}`;
+            : `http://localhost:5000/${cleanPath}`;
         } else {
-          data.imgUrl = "/public/images/default-avatar.jpg";
+          data.imgUrl = "/public/images/ai.jpg";
         }
 
         setUserData(data);
@@ -79,12 +79,12 @@ const Profile = () => {
         <div className="info">
           <div className="user">
             <img
-              src={imgError ? "/public/images/default-avatar.jpg" : userData.imgUrl || "/public/images/default-avatar.jpg"}
+              src={imgError ? "/public/images/ai.jpg" : userData.imgUrl || "/public/images/ai.jpg"}
               alt="Profile"
               className="w-24 h-24 rounded-full object-cover mx-auto block"
               onError={(e) => {
                 setImgError(true);
-                e.target.src = "/public/images/default-avatar.jpg";
+                e.target.src = "/public/images/ai.jpg";
               }}
             />
             <h3>{userData.user_Name}</h3>

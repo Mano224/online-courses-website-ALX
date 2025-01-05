@@ -94,7 +94,8 @@ def register():
         db.session.add(user)
         db.session.commit()
         
-        return jsonify({'message': 'User registered successfully'}), 201
+        return jsonify({'message': 'User registered successfully',
+                        'imgUrl': f"/static/uploads/{img_url}" if img_url else None}), 201
     
     except Exception as e:
         db.session.rollback()
@@ -212,6 +213,7 @@ def videos(playlist_id):
     return jsonify({
         "id": playlist.id,
         "title": playlist.title,
+        "thumbnail": playlist.thumbnail,
         "videos": [{
             "id": v.id,
             "title": v.title,
@@ -581,7 +583,7 @@ def contact():
         data = request.json
 
         if not data:
-            return jsonify({"error": " no data found"})
+            return jsonify({"error": " no data found"}),500
         user_id = data.get("user_id")
         name = data.get("name")
         email = data.get("email")
@@ -589,11 +591,11 @@ def contact():
         message = data.get("message")
 
         if not user_id:
-            return jsonify({"error": "user id required"})
+            return jsonify({"error": "user id required"}),400
         contact = Contact(user_id=user_id.strip(), name=name.strip(), email=email.strip(), number=number.strip(), message=message.strip())
         db.session.add(contact)
         db.session.commit()
-        return jsonify({"message": "message sent succssefully"})
+        return jsonify({"message": "message sent succssefully"}),201
     except Exception as e:
         return jsonify({"error", str(e)}), 500
     
