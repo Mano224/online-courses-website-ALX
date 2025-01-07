@@ -356,7 +356,7 @@ def add_comment(playlist_id, video_id):
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
     
-@app.route('/courses/<int:playlist_id>/<int:video_id>/comment/<int:comment_id>', methods=['PATCH'])
+@app.route('/courses/<int:playlist_id>/<int:video_id>/comment/<int:comment_id>', methods=['PUT'])
 def update_Comment(playlist_id, video_id, comment_id):
     try:
         data = request.json
@@ -375,8 +375,8 @@ def update_Comment(playlist_id, video_id, comment_id):
         comment = Comment.query.filter_by(id=comment_id, video_id=video_id).first()
         if not comment:
             return jsonify({"error", "no found"})
-        if comment.user_id != user_id:
-            return jsonify({"error", " login first"})
+        # if comment.user_id != user_id:
+        #     return jsonify({"error", " login first"})
         
         #update comment
         comment.text = new_text.strip()
@@ -415,8 +415,8 @@ def delete_comment(playlist_id, video_id, comment_id):
             return jsonify({'error': 'Comment not found'}), 404
 
         # Verify the user owns this comment
-        if comment.user_id != user_id:
-            return jsonify({'error': 'You are not authorized to delete this comment'}), 403
+        # if comment.user_id != user_id:
+        #     return jsonify({'error': 'You are not authorized to delete this comment'}), 403
 
         # Delete the comment
         db.session.delete(comment)

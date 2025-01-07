@@ -107,7 +107,7 @@ const WatchVideo = () => {
     }
 
     try {
-      const response = await axios.patch(
+      const response = await axios.put(
         `http://localhost:5000/courses/${playlistId}/${videoId}/comment/${commentId}`,
         {
           text: updatedText,
