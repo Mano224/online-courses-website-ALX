@@ -169,42 +169,42 @@ def init_db():
                     title = "Complete CSS Tutorial (Part 01)",
                     description = " Introduction And What I Need To Learn",
                     video_url = "static/videos/CSS/CSS_v1.mp4.mp4", 
-                    thumbnail = "static/imgs/CSS/css-1.png",# missed
+                    thumbnail = "static/imgs/CSS/post-2-1.png",# missed
                     playlist=playlist_CSS
         )
         video2_CSS = Video(
                     title = "Complete CSS Tutorial (Part 02)",
                     description = "Your First Project And Syntax",
                     video_url = "static/videos/CSS/CSS_v2.mp4.mp4", 
-                    thumbnail = "static/imgs/CSS/css-2.png",# missed
+                    thumbnail = "static/imgs/CSS/post-2-2.png",
                     playlist=playlist_CSS
         )
         video3_CSS = Video(
                     title = "Complete CSS Tutorial (Part 03)",
                     description = "Element Styling",
                     video_url = "static/videos/CSS/CSS_v3.mp4", 
-                    thumbnail = "static/imgs/CSS/css-3.png",# missed
+                    thumbnail = "static/imgs/CSS/post-2-3.png",
                     playlist=playlist_CSS
         )
         video4_CSS = Video(
                     title = "Complete CSS Tutorial (Part 04)",
                     description = "Name Conventions And Rules",
                     video_url = "static/videos/CSS/CSS_v4.mp4", 
-                    thumbnail = "static/imgs/CSS/css-4.png",# missed
+                    thumbnail = "static/imgs/CSS/post-2-4.png",
                     playlist=playlist_CSS
         )
         video5_CSS = Video(
                     title = "Complete CSS Tutorial (Part 05)",
                     description = "Background - Color, Image, Repeat",
                     video_url = "static/videos/CSS/CSS_v5.mp4", 
-                    thumbnail = "static/imgs/CSS/css-5.png",# missed
+                    thumbnail = "static/imgs/CSS/post-2-5.png",
                     playlist=playlist_CSS
         )
         video6_CSS = Video(
                     title = "Complete CSS Tutorial (Part 06)",
                     description = "Background - Attachment, Position, Size",
                     video_url = "static/videos/CSS/CSS_v6.mp4", 
-                    thumbnail = "static/imgs/CSS/css-6.png",# missed
+                    thumbnail = "static/imgs/CSS/post-2-6.png",
                     playlist=playlist_CSS
         )
         db.session.add(playlist_CSS)
