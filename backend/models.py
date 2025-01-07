@@ -168,14 +168,14 @@ def init_db():
         video1_CSS = Video(
                     title = "Complete CSS Tutorial (Part 01)",
                     description = " Introduction And What I Need To Learn",
-                    video_url = "static/videos/CSS/CSS_v1.mp4.mp4", 
+                    video_url = "static/videos/CSS/CSS_v1.mp4", 
                     thumbnail = "static/imgs/CSS/post-2-1.png",# missed
                     playlist=playlist_CSS
         )
         video2_CSS = Video(
                     title = "Complete CSS Tutorial (Part 02)",
                     description = "Your First Project And Syntax",
-                    video_url = "static/videos/CSS/CSS_v2.mp4.mp4", 
+                    video_url = "static/videos/CSS/CSS_v2.mp4", 
                     thumbnail = "static/imgs/CSS/post-2-2.png",
                     playlist=playlist_CSS
         )

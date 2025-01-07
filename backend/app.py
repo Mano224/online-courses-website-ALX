@@ -149,6 +149,8 @@ def update_profile(id):
 
         if not username or not email:
             return jsonify({'error': 'Username and email are required'}), 400
+        if Users.query.filter_by(username=username).first() or Users.query.filter_by(email=email).first():
+            return jsonify({'error': 'Username or email already exists'}), 409
 
 
         # Update basic info if provided

@@ -45,11 +45,16 @@ const Register = () => {
         body: data,
       });
 
-      const result = await response.json();
       
+      if (!response.ok) {
+        const errorData = await response.json()
+        alert(errorData.error)
+      }
       if (response.ok) {
+        const result = await response.json();
         // Store user ID directly
         localStorage.setItem("user_id", result.user_id);
+        alert(result.message)
         
         // Create userData object
         const userData = {

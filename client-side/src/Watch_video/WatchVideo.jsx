@@ -120,6 +120,10 @@ const WatchVideo = () => {
           }
         }
       );
+      if (response.ok) {
+        const successed = await response.json();
+        alert(successed.message)
+      }
 
       if (response.data.comment) {
         setComments(prev => 

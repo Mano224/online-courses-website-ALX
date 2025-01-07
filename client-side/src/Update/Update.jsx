@@ -56,12 +56,16 @@ const Update = () => {
         alert(errorData.error || 'Update failed');
         return;
       }
+      if (response.ok) {
+        const successed = await response.json();
+        alert(successed.message)
+      }
 
       const result = await response.json();
       // Update localStorage with new user data
       localStorage.setItem('userData', JSON.stringify(result));
       // Redirect to profile page
-      navigate('/profile');
+      // navigate('/profile');
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred. Please try again.");
