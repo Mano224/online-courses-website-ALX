@@ -104,7 +104,7 @@ const Profile = () => {
                 </div>
               </div>
               <Link to="#" className="inline-btn">
-                View playlists
+                playlists
               </Link>
             </div>
 
@@ -117,7 +117,7 @@ const Profile = () => {
                 </div>
               </div>
               <Link to="#" className="inline-btn">
-                View liked
+                likes
               </Link>
             </div>
 
@@ -130,7 +130,7 @@ const Profile = () => {
                 </div>
               </div>
               <Link to="#" className="inline-btn">
-                View comments
+                comments
               </Link>
             </div>
           </div>

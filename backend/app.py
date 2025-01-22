@@ -232,14 +232,6 @@ def search():
 
     if not query:
         return jsonify({'message': 'Please provide a search term.'}), 404
-    
-    user_result = Users.query.filter(
-        or_(
-            Users.username.ilike(f"%{query}%"),
-            Users.email.ilike(f"%{query}%"),
-            Users.id.ilike(f"%{query}%"),
-        ).union()
-    ).all()
 
     playlist_result = Playlist.query.filter(
         Playlist.title.ilike(f"%{query}%")
@@ -253,18 +245,17 @@ def search():
 
     # Combine all results
     combined_results = {
-        'users': [
-            {'id': Users.id, 'name': Users.username, 'email': Users.email, 'img_url': Users.img_url}
-            for user in user_result
-        ],
-        'videos': [
-            {'id': Video.id, 'title': Video.title, 'description': Video.description, 'url': Video.video_url}
-            for video in videos_result
-        ],
-        'playlists': [
-            {'id': Playlist.id, 'tilte' : Playlist.title}
-            for playlist in playlist_result
-        ]
+        'playlists': [{
+            'id': playlist.id,
+            'title': playlist.title,
+            'thumbnail': f'http://localhost:5000/{playlist.thumbnail}' if playlist.thumbnail else None
+        } for playlist in playlist_result],
+        'videos': [{
+            'id': video.id,
+            'title': video.title,
+            'description': video.description,
+            'thumbnail': f'http://localhost:5000/{video.thumbnail}' if video.thumbnail else None
+        } for video in videos_result]
     }
 
     return jsonify(combined_results), 200

@@ -17,6 +17,7 @@ import SearchResults from './SearchResults';
 import { useState } from 'react';
 import axios from 'axios';
 import { UserProvider } from './UserContext';
+// import SearchResults from './components/SearchResults';
 
 function App() {
   const [searchResults, setSearchResults] = useState([]);
@@ -47,6 +48,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/update-profile" element={<Update />} />
+          <Route path="/search" element={<SearchResults />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:playlistId/:videoId" element={<WatchVideo />} />
           <Route path="/courses/:playlistId" element={<Playlist />} />

@@ -66,8 +66,7 @@ const HeaderAndSideBar = ({ onSearch }) => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    onSearch(searchQuery);
-    navigate('/search');
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
   };
 
   const toggleDarkMode = () => {

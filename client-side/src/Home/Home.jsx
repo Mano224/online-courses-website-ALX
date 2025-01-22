@@ -1,7 +1,54 @@
-import Footer from '../Footer/Footer';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
+  const [userData, setUserData] = useState(() => {
+    const storedData = localStorage.getItem('userData');
+    return storedData ? JSON.parse(storedData) : {
+      user_Name: "User",
+      user_type: "student",
+      imgUrl: "/public/images/ai.jpg",
+      comments_count: 0,
+      likes_count: 0,
+      saved_videos_count: 0
+    };
+  });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const storedUserData = localStorage.getItem('userData');
+        const userData = storedUserData ? JSON.parse(storedUserData) : null;
+        
+        const response = await fetch(`http://localhost:5000/profile?user_id=${userData.user_id}`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data = await response.json();
+
+        setUserData(data);
+        localStorage.setItem('userData', JSON.stringify(data));
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedData = localStorage.getItem('userData');
+      if (storedData) {
+        setUserData(JSON.parse(storedData));
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
+
   return (
     <div>
       <section className="home-grid">
@@ -10,17 +57,17 @@ const Home = () => {
         <div className="box">
           <h3 className="title">likes and comments</h3>
           <p className="likes">
-            total likes : <span>25</span>
+            total likes : <span>{userData.likes_count}</span>
           </p>
-          <Link to="#" className="inline-btn">view likes</Link>
+          <Link to="#" className="inline-btn">likes</Link>
           <p className="likes">
-            total comments : <span>12</span>
+            total comments : <span>{userData.comments_count}</span>
           </p>
-          <Link to="#" className="inline-btn">view comments</Link>
+          <Link to="#" className="inline-btn">comments</Link>
           <p className="likes">
-            saved playlists : <span>4</span>
+            saved playlists : <span>{userData.saved_videos_count}</span>
           </p>
-          <Link to="#" className="inline-btn">view playlists</Link>
+          <Link to="#" className="inline-btn">playlists</Link>
         </div>
         <div className="box">
           <h3 className="title">top categories</h3>
