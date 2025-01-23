@@ -27,8 +27,6 @@ def serve_image(filename):
 # get-user
 @app.route('/profile', methods=["GET"])
 def get_user():
-    # You should get the user ID from the authentication token/session
-    # For now, let's assume it comes from a query parameter
     user_id = request.args.get('user_id')
     
     if not user_id:

@@ -41,7 +41,7 @@ const Login = () => {
           user_type: result.user_type || "student", // Default to "student" if not provided
           email: formData.email,
           imgUrl: result.imgUrl
-            ? `http://localhost:5000/static/uploads/${result.imgUrl}` // Ensure correct path
+            ? `http://localhost:5000/static/uploads/${result.imgUrl}` 
             : "/public/images/ai.jpg", // Default avatar
         };
         console.log('Full Backend Response:', result);

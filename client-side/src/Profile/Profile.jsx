@@ -21,11 +21,7 @@ const Profile = () => {
       try {
         const storedUserData = localStorage.getItem('userData');
         const userData = storedUserData ? JSON.parse(storedUserData) : null;
-        
-        // if (!userData || !userData.user_id) {
-        //   window.location.href = '/login';
-        //   return;
-        // }
+      
         
         const response = await fetch(`http://localhost:5000/profile?user_id=${userData.user_id}`);
         if (!response.ok) {
