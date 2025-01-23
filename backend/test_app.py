@@ -29,7 +29,7 @@ class AppTestCase(unittest.TestCase):
         # Test user registration
         response = self.app.post('/register', data={
             'name': 'testuser',
-            'email': 'test@example.com',
+            'email': 'test@gmail.com',
             'pass': 'password',
             'c_pass': 'password',
             'user_type': 'student'
@@ -40,14 +40,14 @@ class AppTestCase(unittest.TestCase):
         # Test registering an existing user
         self.app.post('/register', data={
             'name': 'testuser',
-            'email': 'test@example.com',
+            'email': 'test@gmail.com',
             'pass': 'password',
             'c_pass': 'password',
             'user_type': 'student'
         })
         response = self.app.post('/register', data={
             'name': 'testuser',
-            'email': 'test@example.com',
+            'email': 'test@gmail.com',
             'pass': 'password',
             'c_pass': 'password'
         })
@@ -57,12 +57,12 @@ class AppTestCase(unittest.TestCase):
         # Test user login
         self.app.post('/register', data={
             'name': 'testuser',
-            'email': 'test@example.com',
+            'email': 'test@gmail.com',
             'pass': 'password',
             'c_pass': 'password'
         })
         response = self.app.post('/login', json={
-            'email': 'test@example.com',
+            'email': 'test@gmail.com',
             'pass': 'password'
         })
         self.assertEqual(response.status_code, 200)
@@ -70,7 +70,7 @@ class AppTestCase(unittest.TestCase):
     def test_login_user_invalid(self):
         # Test login with invalid credentials
         response = self.app.post('/login', json={
-            'email': 'wrong@example.com',
+            'email': 'wrong@gmail.com',
             'pass': 'wrongpassword'
         })
         self.assertEqual(response.status_code, 401)
@@ -80,7 +80,7 @@ class AppTestCase(unittest.TestCase):
         # Assuming user with ID 1 exists
         response = self.app.patch('/update-profile/1', data={
             'username': 'updateduser',
-            'email': 'updated@example.com'
+            'email': 'updated@gmail.com'
         })
         self.assertEqual(response.status_code, 200)
 
@@ -88,7 +88,7 @@ class AppTestCase(unittest.TestCase):
         # Test updating a non-existing user profile
         response = self.app.patch('/update-profile/999', data={
             'username': 'updateduser',
-            'email': 'updated@example.com'
+            'email': 'updated@gmail.com'
         })
         self.assertEqual(response.status_code, 404)
 
