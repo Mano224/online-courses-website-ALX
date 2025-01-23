@@ -66,7 +66,6 @@ const Teachers = () => {
                 <p>total likes : <span>{teacher.likes_count}</span></p>
               </div>
               <Link to={`/teacher/profile/${teacher._id}`}>
-                <button className="inline-btn">View Profile</button>
               </Link>
             </div>
           ))}

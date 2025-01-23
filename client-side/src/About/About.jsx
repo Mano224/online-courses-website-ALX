@@ -17,7 +17,7 @@ const About = () => {
         quasi illo? Distinctio expedita commodi, nemo a quam error repellendus
         sint, fugiat quis numquam eum eveniet sequi aspernatur quaerat tenetur.
       </p>
-      <a href="courses.html" className="inline-btn">Our Courses</a>
+      <a href="courses" className="inline-btn">Our Courses</a>
     </div>
   </div>
 
