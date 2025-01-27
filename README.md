@@ -1,6 +1,4 @@
 # 📚 Responsive E-Learning Website
-![Alt text](https://github.com/ruu23/online-courses-website-ALX/blob/master/backend/static/imgs/website.jpg)
-
 
 🎉 **Welcome to the ultimate guide to creating a complete responsive multi-page online education website!** This project is perfect for beginners who want to learn how to build a modern e-learning platform like **YouTube** with **React**, **HTML**, **CSS**. 🚀
 
@@ -30,7 +28,7 @@ The Online Courses Website is designed to provide an interactive platform for ed
 - Flask for the backend
 - React for the frontend
 - Docker and Docker Compose for containerization
-- PostgreSQL for database management
+- MySQL for database management
 - HTML, CSS, and JavaScript for frontend design
 
 ---
@@ -148,8 +146,7 @@ We’d love your contributions! Feel free to fork, create issues, or submit pull
 - **POST `/teachers`**: Create a new teacher  
 - **GET `/teachers`**: Get all teachers  
 - **GET `/teachers/<int:id>`**: Get a specific teacher  
-- **PATCH `/teachers/<int:id>`**: Update a teacher  
-- **DELETE `/teachers/<int:id>`**: Delete a teacher  
+- **PATCH `/teachers/<int:id>`**: Update a teacher   
 ---
 ## License
 This project is licensed under the MIT License.
